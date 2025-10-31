@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Libro de Reclamaciones | Instituto Luis Negreiros Vega</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="header">
+    <img src="imagen/descarga.jpg" alt="Logo Luis Negreiros Vega" class="logo">
+    <div>
+      <h2>LIBRO DE RECLAMACIONES VIRTUAL</h2>
+      <p><strong>Instituto de Educación Superior Tecnológico Público Luis Negreiros Vega</strong></p>
+      <p>Av. José Granda Cdra. 24 s/n San Martin de Porres. Teléfono: 7119796 / 7119747 &nbsp; WhatsApp: 959509106</p>
+      <p class="web">www.iestpluisnegreiros.edu.pe</p>
+    </div>
+  </div>
+
+  <form class="reclamacion-form" id="reclamacionForm" action="reclamo.php" method="post" enctype="multipart/form-data">
+    <div class="top-row">
+      <div class="fecha">Fecha: <span id="fecha"></span></div>
+      <div class="hoja">Hoja de Reclamación: <span id="hoja"></span></div>
+    </div>
+
+    <h3>Identificación del Consumidor Reclamante</h3>
+      <!-- Campos de Identidad -->
+      <input type="text" name="nombre" placeholder="Nombres y Apellidos *" required>
+      <input type="text" name="documento" placeholder="Tipo de documento (DNI/CE) y número *" required>
+      <input type="email" name="correo" placeholder="Correo electrónico *" required>
+      <input type="text" name="telefono" placeholder="Teléfono *" required>
+      <input type="text" name="direccion" placeholder="Dirección *" required>
+      <select name="categoria" required>
+        <option value="">Categoría *</option>
+        <option>Alumno</option>
+        <option>Egresado</option>
+        <option>Público</option>
+        <option>Familiar</option>
+        <option>Cliente</option>
+        <option>Otro</option>
+      </select>
+    <h3>Identificación del Bien Contratado</h3>
+      <select name="tipo_bien" required>
+        <option value="">Tipo de bien *</option>
+        <option>Producto</option>
+        <option>Servicio</option>
+      </select>
+      <input type="text" name="descripcion_bien" placeholder="Descripción del bien contratado *" required>
+      <input type="number" name="monto" placeholder="Monto reclamado (si corresponde)">
+    <h3>Detalle del Reclamo / Queja</h3>
+      <select name="tipo_reclamo" required>
+        <option value="">Seleccione*</option>
+        <option>Reclamo</option>
+        <option>Queja</option>
+      </select>
+      <textarea name="detalle" placeholder="Detalle del reclamo / queja *" rows="5" required></textarea>
+      <input type="file" name="adjunto" accept=".jpg,.jpeg,.png,.pdf">
+
+    <label>
+      <input type="checkbox" name="privacidad" required>
+      Acepto la política de privacidad y declaro que la información es verdadera.
+    </label>
+    <input type="hidden" name="fecha" id="fechaField">
+    <input type="hidden" name="hoja" id="hojaField">
+    <button type="submit">Enviar Reclamo</button>
+  </form>
+
+  <script>
+    // Coloca la fecha y número de hoja de reclamación automáticamente
+    const now = new Date();
+    const fecha = now.toLocaleDateString('es-PE');
+    document.getElementById('fecha').innerText = fecha;
+    document.getElementById('fechaField').value = fecha;
+    // Hoja: 5 dígitos + año, generado aleatorio
+    const hoja = ('00000' + Math.floor(Math.random()*100000)).slice(-5) + '-' + now.getFullYear();
+    document.getElementById('hoja').innerText = hoja;
+    document.getElementById('hojaField').value = hoja;
+  </script>
+</body>
+</html>
